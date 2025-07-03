@@ -19,7 +19,7 @@ interface Suggestion {
 }
 
 const initialSuggestions: Suggestion[] = [
-  { id: 1, author: '꾸루', avatar: 'https://placehold.co/40x40', content: '피자 회식 한번 했으면 좋겠습니다!', date: new Date(), dataAiHint: "cute character" },
+  { id: 1, author: '록', avatar: 'https://placehold.co/40x40', content: '피자 회식 한번 했으면 좋겠습니다!', date: new Date(), dataAiHint: "cute character" },
 ];
 
 export function TeamSuggestions() {

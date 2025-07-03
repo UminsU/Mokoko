@@ -42,7 +42,7 @@ const formatDateKey = (date: Date): string => {
 
 const createInitialMembers = (): Member[] => [
     { id: 1, name: '시몬', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: true, dataAiHint: "cute character" },
-    { id: 2, name: '꾸루', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
+    { id: 2, name: '록', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
     { id: 3, name: '유렌', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
     { id: 4, name: '달새', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
     { id: 5, name: '하늘', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
@@ -57,7 +57,7 @@ yesterday.setDate(today.getDate() - 1);
 const initialAttendanceData: AttendanceData = {
     [formatDateKey(yesterday)]: [
         { id: 1, name: '시몬', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: true, dataAiHint: "cute character" },
-        { id: 2, name: '꾸루', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
+        { id: 2, name: '록', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 3, name: '유렌', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 4, name: '달새', avatar: `https://placehold.co/40x40`, status: 'absent', memo: '예비군', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 5, name: '하늘', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
@@ -66,7 +66,7 @@ const initialAttendanceData: AttendanceData = {
     ],
     [formatDateKey(today)]: [
         { id: 1, name: '시몬', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: true, dataAiHint: "cute character" },
-        { id: 2, name: '꾸루', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
+        { id: 2, name: '록', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 3, name: '유렌', avatar: `https://placehold.co/40x40`, status: 'absent', memo: '병원 진료', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 4, name: '달새', avatar: `https://placehold.co/40x40`, status: 'late', memo: '21:00', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 5, name: '하늘', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
@@ -189,7 +189,7 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'participate') && (
               <div title="Participants" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'participate').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-primary">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-primary bg-primary/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
                     <AvatarFallback className="bg-primary text-primary-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
@@ -199,7 +199,7 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'late') && (
               <div title="Late" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'late').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-accent">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-accent bg-accent/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
                     <AvatarFallback className="bg-accent text-accent-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
@@ -209,7 +209,7 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'absent') && (
               <div title="Absentees" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'absent').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-destructive">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-destructive bg-destructive/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
                     <AvatarFallback className="bg-destructive text-destructive-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
@@ -299,7 +299,7 @@ export function AttendanceManager() {
                             size="sm"
                             variant={member.status === 'late' ? 'secondary' : 'outline'}
                             onClick={() => handleStatusChange(member.id, 'late')}
-                            className="transition-all duration-200"
+                            className="transition-all duration-200 hover:bg-accent hover:text-accent-foreground"
                           >
                             △
                           </Button>
