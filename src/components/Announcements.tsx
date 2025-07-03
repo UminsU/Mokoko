@@ -1,7 +1,7 @@
 "use client";
 
 import { Megaphone, Pencil, Save } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
@@ -51,7 +51,6 @@ export function Announcements() {
             </Button>
           )}
         </div>
-        <CardDescription>프로젝트 관련 중요 업데이트를 확인하세요.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {announcements.map((ann, index) => (
