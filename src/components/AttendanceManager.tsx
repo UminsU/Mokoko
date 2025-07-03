@@ -43,7 +43,10 @@ const formatDateKey = (date: Date): string => {
 };
 
 const simonAvatarUrl = "https://img.lostark.co.kr/armory/1/F5F6C16AD364A6EC4CCC5194E9F48360F4D53D708220F33314646117B91D2ECC.jpg?v=20250703014043";
-const simonAvatarStyle: CSSProperties = { objectPosition: 'center 20%' };
+const simonAvatarStyle: CSSProperties = {
+  objectFit: 'cover',
+  objectPosition: 'center -20px', // top 기준으로 약간 위로 올림
+};
 
 const createInitialMembers = (): Member[] => [
     { id: 1, name: '시몬', avatar: simonAvatarUrl, status: 'pending', memo: '', isCurrentUser: true, dataAiHint: "cute character", avatarStyle: simonAvatarStyle, unoptimized: true },
@@ -56,7 +59,7 @@ const createInitialMembers = (): Member[] => [
 ];
 
 const today = new Date();
-const yesterday = new Date();
+const yesterday = new Date()
 yesterday.setDate(today.getDate() - 1);
 
 const initialAttendanceData: AttendanceData = {
