@@ -42,7 +42,7 @@ const formatDateKey = (date: Date): string => {
 };
 
 const simonAvatarUrl = "https://img.lostark.co.kr/armory/1/F5F6C16AD364A6EC4CCC5194E9F48360F4D53D708220F33314646117B91D2ECC.jpg?v=20250703014043";
-const simonAvatarStyle = { objectPosition: '-215px -83px' };
+const simonAvatarStyle = { objectPosition: 'center 20%' };
 
 const createInitialMembers = (): Member[] => [
     { id: 1, name: '시몬', avatar: simonAvatarUrl, status: 'pending', memo: '', isCurrentUser: true, dataAiHint: "cute character", avatarStyle: simonAvatarStyle },
@@ -193,7 +193,7 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'participate') && (
               <div title="Participants" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'participate').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-primary bg-primary/20">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-primary bg-primary/80 text-primary-foreground">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} style={m.avatarStyle} />
                     <AvatarFallback className="bg-primary text-primary-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
@@ -203,7 +203,7 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'late') && (
               <div title="Late" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'late').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-accent bg-accent/20">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-accent bg-accent/80 text-accent-foreground">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} style={m.avatarStyle} />
                     <AvatarFallback className="bg-accent text-accent-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
@@ -213,7 +213,7 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'absent') && (
               <div title="Absentees" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'absent').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-destructive bg-destructive/20">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-destructive bg-destructive/80 text-destructive-foreground">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} style={m.avatarStyle} />
                     <AvatarFallback className="bg-destructive text-destructive-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>

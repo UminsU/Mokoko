@@ -20,7 +20,7 @@ interface Suggestion {
 }
 
 const simonAvatarUrl = "https://img.lostark.co.kr/armory/1/F5F6C16AD364A6EC4CCC5194E9F48360F4D53D708220F33314646117B91D2ECC.jpg?v=20250703014043";
-const simonAvatarStyle = { objectPosition: '-215px -83px' };
+const simonAvatarStyle = { objectPosition: 'center 20%' };
 
 const initialSuggestions: Suggestion[] = [
   { id: 1, author: '꾸루', avatar: 'https://placehold.co/40x40', content: '피자 회식 한번 했으면 좋겠습니다!', date: new Date(), dataAiHint: "cute character" },
