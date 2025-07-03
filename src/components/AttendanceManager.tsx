@@ -265,7 +265,7 @@ export function AttendanceManager() {
                   {selectedDate.toLocaleDateString('ko-KR', { month: 'long', day: 'numeric' })} 출석 현황
                 </DialogTitle>
                 <DialogDescription>
-                  기본 모임 시간은 20:30입니다. 참여, 지각 또는 불참을 선택하고, 사유를 남겨주세요.
+                  참여, 지각 또는 불참을 선택하고, 사유를 남겨주세요.
                 </DialogDescription>
               </DialogHeader>
 
