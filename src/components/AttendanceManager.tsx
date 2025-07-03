@@ -188,9 +188,9 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'participate') && (
               <div title="Participants" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'participate').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-background">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-primary bg-primary/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback>{m.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="text-primary text-xs">{m.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
