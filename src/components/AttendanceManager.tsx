@@ -280,7 +280,7 @@ export function AttendanceManager() {
                       </Avatar>
                       <div>
                         <p className="font-semibold text-lg">{member.name}</p>
-                        <p className="text-sm text-muted-foreground">{member.isCurrentUser ? "대표자" : "팀원"}</p>
+                        <p className="text-sm text-muted-foreground">{member.isCurrentUser ? "공대장" : "공대원"}</p>
                       </div>
                     </div>
 
