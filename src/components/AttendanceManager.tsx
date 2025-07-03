@@ -190,7 +190,7 @@ export function AttendanceManager() {
                 {dayData.filter(m => m.status === 'participate').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-primary bg-primary/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-primary dark:text-primary-foreground text-xs font-semibold">{m.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="text-primary dark:text-primary-foreground text-xs font-semibold">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
@@ -198,9 +198,9 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'late') && (
               <div title="Late" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'late').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-secondary bg-secondary/20">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-accent bg-accent/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-secondary-foreground text-xs font-semibold">{m.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="text-accent-foreground text-xs font-semibold">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
@@ -210,7 +210,7 @@ export function AttendanceManager() {
                 {dayData.filter(m => m.status === 'absent').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-destructive bg-destructive/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-destructive-foreground text-xs font-semibold">{m.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="text-destructive-foreground text-xs font-semibold">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
@@ -275,7 +275,7 @@ export function AttendanceManager() {
                     <div className="flex items-center gap-4">
                       <Avatar className="h-12 w-12 border-2 border-primary/20">
                         <AvatarImage src={member.avatar} alt={member.name} data-ai-hint={member.dataAiHint}/>
-                        <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+                        <AvatarFallback>{member.name.substring(0, 2)}</AvatarFallback>
                       </Avatar>
                       <div>
                         <p className="font-semibold text-lg">{member.name}</p>
