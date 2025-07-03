@@ -41,7 +41,7 @@ const formatDateKey = (date: Date): string => {
     return date.toISOString().split('T')[0];
 };
 
-const simonAvatarUrl = "https://img.lostark.co.kr/armory/1/F5F6C16AD364A6EC4CCC5194E9F48360F4D53D708220F33314646117B91D2ECC.jpg?v=20250703014043";
+const simonAvatarUrl = "https://img.lostark.co.kr/armory/1/F5F6C16AD364A6EC4CCC5194E9F48360F4D53D708220F33314646117B91D2ECC.jpg";
 const simonAvatarStyle: CSSProperties = { objectPosition: 'center 25%' };
 
 const createInitialMembers = (): Member[] => [
