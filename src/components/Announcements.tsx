@@ -10,15 +10,9 @@ import { Textarea } from '@/components/ui/textarea';
 const initialAnnouncements = [
   {
     id: 1,
-    title: '주간 회의 시간 변경 안내',
+    title: '주간 일정',
     date: new Date(),
     content: '이번 주 주간 회의는 금요일 오후 3시에서 오후 5시로 변경되었습니다. 모두 착오 없으시길 바랍니다.'
-  },
-  {
-    id: 2,
-    title: '새로운 기능 배포 완료',
-    date: new Date(new Date().setDate(new Date().getDate() - 1)),
-    content: '사용자 프로필 기능이 새롭게 추가되었습니다. 각자 프로필 정보를 업데이트 해주세요.'
   }
 ];
 
@@ -48,7 +42,7 @@ export function Announcements() {
         <div className="flex justify-between items-center">
           <CardTitle className="flex items-center gap-2">
             <Megaphone className="h-6 w-6 text-primary" />
-            <span>리더 공지사항</span>
+            <span>공지사항</span>
           </CardTitle>
           {isManager && (
             <Button variant="ghost" size="icon" onClick={handleEditToggle}>
