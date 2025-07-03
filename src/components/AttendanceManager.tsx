@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -190,7 +191,7 @@ export function AttendanceManager() {
                 {dayData.filter(m => m.status === 'participate').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-primary bg-primary/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-primary dark:text-primary-foreground text-xs font-semibold">{m.name.substring(0, 2)}</AvatarFallback>
+                    <AvatarFallback className="text-primary dark:text-primary-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
@@ -200,7 +201,7 @@ export function AttendanceManager() {
                 {dayData.filter(m => m.status === 'late').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-accent bg-accent/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-accent-foreground text-xs font-semibold">{m.name.substring(0, 2)}</AvatarFallback>
+                    <AvatarFallback className="text-accent-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
@@ -210,7 +211,7 @@ export function AttendanceManager() {
                 {dayData.filter(m => m.status === 'absent').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-destructive bg-destructive/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-destructive-foreground text-xs font-semibold">{m.name.substring(0, 2)}</AvatarFallback>
+                    <AvatarFallback className="text-destructive-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -74,7 +75,7 @@ export function TeamSuggestions() {
               <div className="flex items-start gap-4">
                 <Avatar className="h-9 w-9 border">
                   <AvatarImage src={suggestion.avatar} alt={suggestion.author} data-ai-hint={suggestion.dataAiHint} />
-                  <AvatarFallback>{suggestion.author.charAt(0)}</AvatarFallback>
+                  <AvatarFallback>{suggestion.author.substring(0, 2)}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
