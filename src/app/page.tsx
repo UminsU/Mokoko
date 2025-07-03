@@ -26,13 +26,9 @@ export default function Home() {
       </header>
 
       <main className="flex-1 container mx-auto p-4 sm:p-6 lg:p-8">
-        <div className="grid gap-8 lg:grid-cols-3">
-          <div className="lg:col-span-2 space-y-8">
-            <AttendanceManager />
-          </div>
-          <div className="space-y-8">
-            <Announcements />
-          </div>
+        <div className="flex flex-col gap-8">
+          <Announcements />
+          <AttendanceManager />
         </div>
       </main>
 
