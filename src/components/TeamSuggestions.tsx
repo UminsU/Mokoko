@@ -20,7 +20,6 @@ interface Suggestion {
 
 const initialSuggestions: Suggestion[] = [
   { id: 1, author: '꾸루', avatar: 'https://placehold.co/40x40', content: '피자 회식 한번 했으면 좋겠습니다!', date: new Date(), dataAiHint: "cute character" },
-  { id: 2, author: '달새', avatar: 'https://placehold.co/40x40', content: '코드 리뷰 시간을 정기적으로 가졌으면 합니다.', date: new Date(new Date().setDate(new Date().getDate() - 1)), dataAiHint: "cute character" },
 ];
 
 export function TeamSuggestions() {
@@ -53,7 +52,7 @@ export function TeamSuggestions() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Lightbulb className="h-6 w-6 text-primary" />
-          <span>팀원 건의사항</span>
+          <span>건의사항</span>
         </CardTitle>
         <CardDescription>자유롭게 의견을 남겨주세요.</CardDescription>
       </CardHeader>
