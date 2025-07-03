@@ -220,11 +220,11 @@ export function AttendanceManager() {
             month: 'space-y-4 w-full',
             caption_label: 'text-lg font-medium',
             table: 'w-full border-collapse space-y-1',
-            head_row: 'flex w-full gap-1',
-            head_cell: 'flex-1 text-muted-foreground rounded-md font-normal text-center text-[0.8rem]',
-            row: 'flex w-full mt-2 gap-1',
-            cell: 'flex-1 h-28 text-center text-sm p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20',
-            day: cn(buttonVariants({ variant: 'ghost' }), 'h-full w-full p-0 font-normal aria-selected:opacity-100 border items-start justify-start rounded-md'),
+            head_row: 'flex',
+            head_cell: 'text-muted-foreground rounded-md w-full font-normal text-[0.8rem]',
+            row: 'flex w-full mt-2',
+            cell: 'h-28 text-center text-sm p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20',
+            day: cn(buttonVariants({ variant: 'ghost' }), 'h-full w-full p-0 font-normal aria-selected:opacity-100 border items-start justify-start'),
             day_selected: 'bg-primary/20 text-primary-foreground',
             day_today: 'bg-secondary text-accent-foreground',
             day_outside: 'text-muted-foreground/50',
@@ -265,6 +265,7 @@ export function AttendanceManager() {
                       <div className="w-full sm:w-auto flex-grow sm:flex-grow-0 space-y-2">
                         <div className="flex justify-start sm:justify-end gap-2">
                           <Button
+                            size="sm"
                             variant={member.status === 'participate' ? 'default' : 'outline'}
                             onClick={() => handleStatusChange(member.id, 'participate')}
                             className="transition-all duration-200"
@@ -272,6 +273,7 @@ export function AttendanceManager() {
                             <Check className="mr-2 h-4 w-4" /> 참여
                           </Button>
                           <Button
+                            size="sm"
                             variant={member.status === 'absent' ? 'destructive' : 'outline'}
                             onClick={() => handleStatusChange(member.id, 'absent')}
                             className="transition-all duration-200"
