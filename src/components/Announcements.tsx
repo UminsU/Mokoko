@@ -73,7 +73,7 @@ export function Announcements() {
                   className="mt-2"
                 />
               ) : (
-                <p className="mt-2 text-sm text-muted-foreground">
+                <p className="mt-2 text-sm text-muted-foreground whitespace-pre-wrap">
                   {ann.content}
                 </p>
               )}
