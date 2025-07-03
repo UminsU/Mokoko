@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, type CSSProperties } from 'react';
@@ -20,8 +19,19 @@ interface Suggestion {
   unoptimized?: boolean;
 }
 
-const simonAvatarUrl = "https://img.lostark.co.kr/armory/1/F5F6C16AD364A6EC4CCC5194E9F48360F4D53D708220F33314646117B91D2ECC.jpg?v=20250703014043";
-const simonAvatarStyle: CSSProperties = { objectPosition: 'center 20%' };
+const simonAvatarUrl = "/images/simon-avatar.jpg";
+const simonAvatarStyle: CSSProperties = {
+  objectFit: 'cover',
+  objectPosition: 'center +10px', // 조금만 아래로 내림
+  transform: 'scale(4.0)' // 4.0배 확대
+};
+
+const kkuruAvatarUrl = "/images/kkuru-avatar.jpg";
+const kkuruAvatarStyle: CSSProperties = {
+  objectFit: 'cover',
+  objectPosition: 'center +3px', // 위치 조정
+  transform: 'scale(4.0)' // 4.0배 확대
+};
 
 const initialSuggestions: Suggestion[] = [
   { id: 1, author: '꾸루', avatar: 'https://placehold.co/40x40', content: '피자 회식 한번 했으면 좋겠습니다!', date: new Date(), dataAiHint: "cute character" },
@@ -80,7 +90,23 @@ export function TeamSuggestions() {
             <div key={suggestion.id}>
               <div className="flex items-start gap-4">
                 <Avatar className="h-9 w-9 border">
-                  <AvatarImage src={suggestion.avatar} alt={suggestion.author} data-ai-hint={suggestion.dataAiHint} style={suggestion.avatarStyle} unoptimized={suggestion.unoptimized} />
+                  {suggestion.author === '시몬' ? (
+                    <img
+                      src="/images/simon-avatar.jpg"
+                      alt="시몬"
+                      className="aspect-square h-full w-full object-cover rounded-full"
+                      style={suggestion.avatarStyle}
+                    />
+                  ) : suggestion.author === '꾸루' ? (
+                    <img
+                      src="/images/kkuru-avatar.jpg"
+                      alt="꾸루"
+                      className="aspect-square h-full w-full object-cover rounded-full"
+                      style={suggestion.avatarStyle}
+                    />
+                  ) : (
+                    <AvatarImage src={suggestion.avatar} alt={suggestion.author} data-ai-hint={suggestion.dataAiHint} style={suggestion.avatarStyle} unoptimized={suggestion.unoptimized} />
+                  )}
                   <AvatarFallback>{suggestion.author.substring(0, 2)}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">

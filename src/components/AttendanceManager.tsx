@@ -42,15 +42,23 @@ const formatDateKey = (date: Date): string => {
     return date.toISOString().split('T')[0];
 };
 
-const simonAvatarUrl = "https://img.lostark.co.kr/armory/1/F5F6C16AD364A6EC4CCC5194E9F48360F4D53D708220F33314646117B91D2ECC.jpg?v=20250703014043";
+const simonAvatarUrl = "/images/simon-avatar.jpg";
 const simonAvatarStyle: CSSProperties = {
   objectFit: 'cover',
-  objectPosition: 'center -20px', // top 기준으로 약간 위로 올림
+  objectPosition: 'center +10px', // 조금만 아래로 내림
+  transform: 'scale(4.0)', // 4.0배 확대
+};
+
+const kkuruAvatarUrl = "/images/kkuru-avatar.jpg";
+const kkuruAvatarStyle: CSSProperties = {
+  objectFit: 'cover',
+  objectPosition: 'center +3px', // 위치 조정
+  transform: 'scale(4.0)', // 4.0배 확대
 };
 
 const createInitialMembers = (): Member[] => [
     { id: 1, name: '시몬', avatar: simonAvatarUrl, status: 'pending', memo: '', isCurrentUser: true, dataAiHint: "cute character", avatarStyle: simonAvatarStyle, unoptimized: true },
-    { id: 2, name: '꾸루', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
+    { id: 2, name: '꾸루', avatar: kkuruAvatarUrl, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character", avatarStyle: kkuruAvatarStyle, unoptimized: true },
     { id: 3, name: '유렌', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
     { id: 4, name: '달새', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
     { id: 5, name: '하늘', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
@@ -65,7 +73,7 @@ yesterday.setDate(today.getDate() - 1);
 const initialAttendanceData: AttendanceData = {
     [formatDateKey(yesterday)]: [
         { id: 1, name: '시몬', avatar: simonAvatarUrl, status: 'participate', memo: '', isCurrentUser: true, dataAiHint: "cute character", avatarStyle: simonAvatarStyle, unoptimized: true },
-        { id: 2, name: '꾸루', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
+        { id: 2, name: '꾸루', avatar: kkuruAvatarUrl, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character", avatarStyle: kkuruAvatarStyle, unoptimized: true },
         { id: 3, name: '유렌', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 4, name: '달새', avatar: `https://placehold.co/40x40`, status: 'absent', memo: '예비군', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 5, name: '하늘', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
@@ -74,7 +82,7 @@ const initialAttendanceData: AttendanceData = {
     ],
     [formatDateKey(today)]: [
         { id: 1, name: '시몬', avatar: simonAvatarUrl, status: 'pending', memo: '', isCurrentUser: true, dataAiHint: "cute character", avatarStyle: simonAvatarStyle, unoptimized: true },
-        { id: 2, name: '꾸루', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
+        { id: 2, name: '꾸루', avatar: kkuruAvatarUrl, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character", avatarStyle: kkuruAvatarStyle, unoptimized: true },
         { id: 3, name: '유렌', avatar: `https://placehold.co/40x40`, status: 'absent', memo: '병원 진료', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 4, name: '달새', avatar: `https://placehold.co/40x40`, status: 'late', memo: '21:00', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 5, name: '하늘', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
@@ -198,7 +206,23 @@ export function AttendanceManager() {
               <div title="Participants" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'participate').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-primary bg-primary/20 text-primary-foreground">
-                    <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} style={m.avatarStyle} unoptimized={m.unoptimized} />
+                    {m.name === '시몬' ? (
+                      <img
+                        src="/images/simon-avatar.jpg"
+                        alt="시몬"
+                        className="aspect-square h-full w-full object-cover rounded-full"
+                        style={m.avatarStyle}
+                      />
+                    ) : m.name === '꾸루' ? (
+                      <img
+                        src="/images/kkuru-avatar.jpg"
+                        alt="꾸루"
+                        className="aspect-square h-full w-full object-cover rounded-full"
+                        style={m.avatarStyle}
+                      />
+                    ) : (
+                      <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} style={m.avatarStyle} unoptimized={m.unoptimized} />
+                    )}
                     <AvatarFallback className="bg-primary text-primary-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
@@ -208,7 +232,23 @@ export function AttendanceManager() {
               <div title="Late" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'late').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-accent bg-accent/20 text-accent-foreground">
-                    <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} style={m.avatarStyle} unoptimized={m.unoptimized} />
+                    {m.name === '시몬' ? (
+                      <img
+                        src="/images/simon-avatar.jpg"
+                        alt="시몬"
+                        className="aspect-square h-full w-full object-cover rounded-full"
+                        style={m.avatarStyle}
+                      />
+                    ) : m.name === '꾸루' ? (
+                      <img
+                        src="/images/kkuru-avatar.jpg"
+                        alt="꾸루"
+                        className="aspect-square h-full w-full object-cover rounded-full"
+                        style={m.avatarStyle}
+                      />
+                    ) : (
+                      <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} style={m.avatarStyle} unoptimized={m.unoptimized} />
+                    )}
                     <AvatarFallback className="bg-accent text-accent-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
@@ -218,7 +258,23 @@ export function AttendanceManager() {
               <div title="Absentees" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'absent').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-destructive bg-destructive/20 text-destructive-foreground">
-                    <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} style={m.avatarStyle} unoptimized={m.unoptimized} />
+                    {m.name === '시몬' ? (
+                      <img
+                        src="/images/simon-avatar.jpg"
+                        alt="시몬"
+                        className="aspect-square h-full w-full object-cover rounded-full"
+                        style={m.avatarStyle}
+                      />
+                    ) : m.name === '꾸루' ? (
+                      <img
+                        src="/images/kkuru-avatar.jpg"
+                        alt="꾸루"
+                        className="aspect-square h-full w-full object-cover rounded-full"
+                        style={m.avatarStyle}
+                      />
+                    ) : (
+                      <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} style={m.avatarStyle} unoptimized={m.unoptimized} />
+                    )}
                     <AvatarFallback className="bg-destructive text-destructive-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
@@ -283,7 +339,27 @@ export function AttendanceManager() {
                   <div key={member.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-lg transition-colors hover:bg-secondary/50 border-b last:border-b-0">
                     <div className="flex items-center gap-4">
                       <Avatar className="h-12 w-12 border-2 border-primary/20">
-                        <AvatarImage src={member.avatar} alt={member.name} data-ai-hint={member.dataAiHint} style={member.avatarStyle} unoptimized={member.unoptimized}/>
+                        {member.name === '시몬' ? (
+                          <img
+                            src="/images/simon-avatar.jpg"
+                            alt="시몬"
+                            className="aspect-square h-full w-full object-cover rounded-full"
+                            style={member.avatarStyle}
+                            onLoad={() => console.log('시몬 아바타 로드 성공')}
+                            onError={() => console.log('시몬 아바타 로드 실패')}
+                          />
+                        ) : member.name === '꾸루' ? (
+                          <img
+                            src="/images/kkuru-avatar.jpg"
+                            alt="꾸루"
+                            className="aspect-square h-full w-full object-cover rounded-full"
+                            style={member.avatarStyle}
+                            onLoad={() => console.log('꾸루 아바타 로드 성공')}
+                            onError={() => console.log('꾸루 아바타 로드 실패')}
+                          />
+                        ) : (
+                          <AvatarImage src={member.avatar} alt={member.name} data-ai-hint={member.dataAiHint} style={member.avatarStyle} unoptimized={member.unoptimized}/>
+                        )}
                         <AvatarFallback>{member.name.substring(0, 2)}</AvatarFallback>
                       </Avatar>
                       <div>
