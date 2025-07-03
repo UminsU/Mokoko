@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'upload3.inven.co.kr',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

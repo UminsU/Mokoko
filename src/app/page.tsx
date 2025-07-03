@@ -13,7 +13,7 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
-              <MokokoLogo className="h-8 w-8" />
+              <MokokoLogo width={32} height={32} />
               <span className="font-bold text-lg hidden sm:inline">모코코의 아크라시아 구하기</span>
             </Link>
             <Button variant="ghost" size="icon" asChild>

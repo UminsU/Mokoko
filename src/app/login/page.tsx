@@ -11,7 +11,7 @@ export default function LoginPage() {
       <Card className="w-full max-w-sm mx-auto">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
-            <MokokoLogo className="h-20 w-20" />
+            <MokokoLogo width={80} height={80} />
           </div>
           <CardTitle className="text-2xl font-bold">모코코의 아크라시아 구하기</CardTitle>
           <CardDescription>팀 프로젝트 일정 조율</CardDescription>
