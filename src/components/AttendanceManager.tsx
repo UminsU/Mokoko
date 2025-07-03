@@ -189,9 +189,9 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'participate') && (
               <div title="Participants" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'participate').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-primary bg-primary/20">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-primary">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-primary dark:text-primary-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
+                    <AvatarFallback className="bg-primary text-primary-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
@@ -199,9 +199,9 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'late') && (
               <div title="Late" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'late').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-accent bg-accent/20">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-accent">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-accent-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
+                    <AvatarFallback className="bg-accent text-accent-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
@@ -209,9 +209,9 @@ export function AttendanceManager() {
             {dayData.some(m => m.status === 'absent') && (
               <div title="Absentees" className="flex flex-wrap -space-x-2 overflow-hidden">
                 {dayData.filter(m => m.status === 'absent').map(m => (
-                  <Avatar key={m.id} className="h-5 w-5 border-2 border-destructive bg-destructive/20">
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-destructive">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-destructive-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
+                    <AvatarFallback className="bg-destructive text-destructive-foreground text-[10px]">{m.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
