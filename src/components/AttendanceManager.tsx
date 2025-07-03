@@ -190,7 +190,7 @@ export function AttendanceManager() {
                 {dayData.filter(m => m.status === 'participate').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-primary bg-primary/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-primary text-xs">{m.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="text-primary dark:text-primary-foreground text-xs font-semibold">{m.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
@@ -200,7 +200,7 @@ export function AttendanceManager() {
                 {dayData.filter(m => m.status === 'late').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-secondary bg-secondary/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-secondary-foreground text-xs">{m.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="text-secondary-foreground text-xs font-semibold">{m.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
@@ -210,7 +210,7 @@ export function AttendanceManager() {
                 {dayData.filter(m => m.status === 'absent').map(m => (
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-destructive bg-destructive/20">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
-                    <AvatarFallback className="text-destructive-foreground text-xs">{m.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="text-destructive-foreground text-xs font-semibold">{m.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
