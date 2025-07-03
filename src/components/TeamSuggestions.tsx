@@ -17,6 +17,7 @@ interface Suggestion {
   date: Date;
   dataAiHint: string;
   avatarStyle?: CSSProperties;
+  unoptimized?: boolean;
 }
 
 const simonAvatarUrl = "https://img.lostark.co.kr/armory/1/F5F6C16AD364A6EC4CCC5194E9F48360F4D53D708220F33314646117B91D2ECC.jpg?v=20250703014043";
@@ -46,6 +47,7 @@ export function TeamSuggestions() {
       date: new Date(),
       dataAiHint: "cute character",
       avatarStyle: simonAvatarStyle,
+      unoptimized: true,
     };
 
     setSuggestions([newEntry, ...suggestions]);
@@ -78,7 +80,7 @@ export function TeamSuggestions() {
             <div key={suggestion.id}>
               <div className="flex items-start gap-4">
                 <Avatar className="h-9 w-9 border">
-                  <AvatarImage src={suggestion.avatar} alt={suggestion.author} data-ai-hint={suggestion.dataAiHint} style={suggestion.avatarStyle} />
+                  <AvatarImage src={suggestion.avatar} alt={suggestion.author} data-ai-hint={suggestion.dataAiHint} style={suggestion.avatarStyle} unoptimized={suggestion.unoptimized} />
                   <AvatarFallback>{suggestion.author.substring(0, 2)}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
