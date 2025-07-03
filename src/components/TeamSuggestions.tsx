@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { Lightbulb, Send } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -16,10 +16,14 @@ interface Suggestion {
   content: string;
   date: Date;
   dataAiHint: string;
+  avatarStyle?: CSSProperties;
 }
 
+const simonAvatarUrl = "https://img.lostark.co.kr/armory/1/F5F6C16AD364A6EC4CCC5194E9F48360F4D53D708220F33314646117B91D2ECC.jpg?v=20250703014043";
+const simonAvatarStyle = { objectPosition: '-215px -83px' };
+
 const initialSuggestions: Suggestion[] = [
-  { id: 1, author: '록', avatar: 'https://placehold.co/40x40', content: '피자 회식 한번 했으면 좋겠습니다!', date: new Date(), dataAiHint: "cute character" },
+  { id: 1, author: '꾸루', avatar: 'https://placehold.co/40x40', content: '피자 회식 한번 했으면 좋겠습니다!', date: new Date(), dataAiHint: "cute character" },
 ];
 
 export function TeamSuggestions() {
@@ -37,10 +41,11 @@ export function TeamSuggestions() {
       id: suggestions.length + 1,
       // In a real app, author would come from logged-in user context
       author: '시몬', 
-      avatar: 'https://placehold.co/40x40',
+      avatar: simonAvatarUrl,
       content: newSuggestion,
       date: new Date(),
-      dataAiHint: "cute character"
+      dataAiHint: "cute character",
+      avatarStyle: simonAvatarStyle,
     };
 
     setSuggestions([newEntry, ...suggestions]);
@@ -73,7 +78,7 @@ export function TeamSuggestions() {
             <div key={suggestion.id}>
               <div className="flex items-start gap-4">
                 <Avatar className="h-9 w-9 border">
-                  <AvatarImage src={suggestion.avatar} alt={suggestion.author} data-ai-hint={suggestion.dataAiHint} />
+                  <AvatarImage src={suggestion.avatar} alt={suggestion.author} data-ai-hint={suggestion.dataAiHint} style={suggestion.avatarStyle} />
                   <AvatarFallback>{suggestion.author.substring(0, 2)}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
@@ -92,3 +97,5 @@ export function TeamSuggestions() {
     </Card>
   );
 }
+
+    
