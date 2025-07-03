@@ -17,8 +17,9 @@ import {
   DialogFooter,
   DialogClose
 } from "@/components/ui/dialog";
+import { Input } from '@/components/ui/input';
 
-type AttendanceStatus = 'participate' | 'absent' | 'pending';
+type AttendanceStatus = 'participate' | 'absent' | 'pending' | 'late';
 
 interface Member {
   id: number;
@@ -66,7 +67,7 @@ const initialAttendanceData: AttendanceData = {
         { id: 1, name: '시몬', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: true, dataAiHint: "cute character" },
         { id: 2, name: '꾸루', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 3, name: '유렌', avatar: `https://placehold.co/40x40`, status: 'absent', memo: '병원 진료', isCurrentUser: false, dataAiHint: "cute character" },
-        { id: 4, name: '달새', avatar: `https://placehold.co/40x40`, status: 'participate', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
+        { id: 4, name: '달새', avatar: `https://placehold.co/40x40`, status: 'late', memo: '21:00', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 5, name: '하늘', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 6, name: '김포', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
         { id: 7, name: '밥콩', avatar: `https://placehold.co/40x40`, status: 'pending', memo: '', isCurrentUser: false, dataAiHint: "cute character" },
@@ -74,15 +75,27 @@ const initialAttendanceData: AttendanceData = {
 };
 
 
-const StatusBadge = ({ status }: { status: AttendanceStatus }) => {
-    const statusConfig: Record<AttendanceStatus, { text: string; variant: 'default' | 'destructive' | 'secondary' }> = {
+const StatusBadge = ({ status, memo }: { status: AttendanceStatus; memo?: string }) => {
+    const statusConfig: Record<AttendanceStatus, { text: string; variant: 'default' | 'destructive' | 'secondary' | 'outline' }> = {
         participate: { text: 'O', variant: 'default' },
         absent: { text: 'X', variant: 'destructive' },
-        pending: { text: '미정', variant: 'secondary' },
+        late: { text: '△', variant: 'secondary' },
+        pending: { text: '미정', variant: 'outline' },
     };
 
     const { text, variant } = statusConfig[status];
-    return <Badge variant={variant}>{text}</Badge>;
+    
+    return (
+        <div className="flex flex-col items-end text-right min-w-[100px]">
+          <Badge variant={variant}>{text}</Badge>
+          {status === 'late' && memo && (
+            <p className="text-sm text-muted-foreground mt-1">시간: {memo}</p>
+          )}
+          {status === 'absent' && memo && (
+            <p className="text-sm text-muted-foreground mt-1">사유: {memo}</p>
+          )}
+        </div>
+    );
 };
 
 export function AttendanceManager() {
@@ -133,7 +146,7 @@ export function AttendanceManager() {
     
     const updatedMembers = membersForSelectedDate.map(m => {
         if (m.id === id) {
-            if (status === 'participate') {
+            if (status === 'participate' || status === 'pending') {
                 setCurrentMemo('');
                 return { ...m, status, memo: '' };
             }
@@ -144,7 +157,7 @@ export function AttendanceManager() {
     updateAttendanceForDate(selectedDateKey, updatedMembers);
   };
 
-  const handleMemoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleMemoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setCurrentMemo(e.target.value);
   }
 
@@ -178,6 +191,16 @@ export function AttendanceManager() {
                   <Avatar key={m.id} className="h-5 w-5 border-2 border-background">
                     <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
                     <AvatarFallback>{m.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                ))}
+              </div>
+            )}
+            {dayData.some(m => m.status === 'late') && (
+              <div title="Late" className="flex flex-wrap -space-x-2 overflow-hidden">
+                {dayData.filter(m => m.status === 'late').map(m => (
+                  <Avatar key={m.id} className="h-5 w-5 border-2 border-secondary bg-secondary/20">
+                    <AvatarImage src={m.avatar} alt={m.name} data-ai-hint={m.dataAiHint} />
+                    <AvatarFallback className="text-secondary-foreground text-xs">{m.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
@@ -242,7 +265,7 @@ export function AttendanceManager() {
                   {selectedDate.toLocaleDateString('ko-KR', { month: 'long', day: 'numeric' })} 출석 현황
                 </DialogTitle>
                 <DialogDescription>
-                  참여 또는 불참을 선택하고, 불참 시 사유를 남겨주세요.
+                  기본 모임 시간은 20:30입니다. 참여, 지각 또는 불참을 선택하고, 사유를 남겨주세요.
                 </DialogDescription>
               </DialogHeader>
 
@@ -273,6 +296,14 @@ export function AttendanceManager() {
                           </Button>
                           <Button
                             size="sm"
+                            variant={member.status === 'late' ? 'secondary' : 'outline'}
+                            onClick={() => handleStatusChange(member.id, 'late')}
+                            className="transition-all duration-200"
+                          >
+                            △
+                          </Button>
+                          <Button
+                            size="sm"
                             variant={member.status === 'absent' ? 'destructive' : 'outline'}
                             onClick={() => handleStatusChange(member.id, 'absent')}
                             className="transition-all duration-200 hover:bg-destructive hover:text-destructive-foreground"
@@ -280,6 +311,12 @@ export function AttendanceManager() {
                             X
                           </Button>
                         </div>
+                        {member.status === 'late' && (
+                          <div className="w-full space-y-2 pt-2">
+                            <Input placeholder="가능한 시간을 입력하세요 (예: 21:00)" value={currentMemo} onChange={handleMemoChange} className="w-full" />
+                            <Button onClick={() => handleSaveMemo(member.id)} size="sm" className="w-full sm:w-auto float-right">시간 저장</Button>
+                          </div>
+                        )}
                         {member.status === 'absent' && (
                           <div className="w-full space-y-2 pt-2">
                             <Textarea placeholder="불참 사유를 입력하세요..." value={currentMemo} onChange={handleMemoChange} className="w-full" />
@@ -288,12 +325,7 @@ export function AttendanceManager() {
                         )}
                       </div>
                     ) : (
-                      <div className="flex flex-col items-end text-right min-w-[100px]">
-                        <StatusBadge status={member.status} />
-                        {member.status === 'absent' && member.memo && (
-                          <p className="text-sm text-muted-foreground mt-1">사유: {member.memo}</p>
-                        )}
-                      </div>
+                      <StatusBadge status={member.status} memo={member.memo} />
                     )}
                   </div>
                 ))}
