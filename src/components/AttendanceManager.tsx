@@ -3,12 +3,11 @@
 import { useState, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Calendar } from '@/components/ui/calendar';
 import { cn } from '@/lib/utils';
-import { Check, X } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -77,8 +76,8 @@ const initialAttendanceData: AttendanceData = {
 
 const StatusBadge = ({ status }: { status: AttendanceStatus }) => {
     const statusConfig: Record<AttendanceStatus, { text: string; variant: 'default' | 'destructive' | 'secondary' }> = {
-        participate: { text: '참여', variant: 'default' },
-        absent: { text: '불참', variant: 'destructive' },
+        participate: { text: 'O', variant: 'default' },
+        absent: { text: 'X', variant: 'destructive' },
         pending: { text: '미정', variant: 'secondary' },
     };
 
@@ -224,7 +223,7 @@ export function AttendanceManager() {
             head_cell: 'text-muted-foreground rounded-md w-[calc(100%/7)] font-normal text-[0.8rem]',
             row: 'flex w-full mt-2',
             cell: 'h-28 text-center text-sm p-0 relative w-[calc(100%/7)] [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20',
-            day: cn(buttonVariants({ variant: 'ghost' }), 'h-full w-full p-0 font-normal aria-selected:opacity-100 border items-start justify-start'),
+            day: cn('h-full w-full p-0 font-normal aria-selected:opacity-100 border items-start justify-start'),
             day_selected: 'bg-primary/20 text-primary-foreground',
             day_today: 'bg-secondary text-accent-foreground',
             day_outside: 'text-muted-foreground/50',
@@ -270,15 +269,15 @@ export function AttendanceManager() {
                             onClick={() => handleStatusChange(member.id, 'participate')}
                             className="transition-all duration-200"
                           >
-                            <Check className="mr-2 h-4 w-4" /> 참여
+                            O
                           </Button>
                           <Button
                             size="sm"
                             variant={member.status === 'absent' ? 'destructive' : 'outline'}
                             onClick={() => handleStatusChange(member.id, 'absent')}
-                            className="transition-all duration-200"
+                            className="transition-all duration-200 hover:bg-destructive hover:text-destructive-foreground"
                           >
-                            <X className="mr-2 h-4 w-4" /> 불참
+                            X
                           </Button>
                         </div>
                         {member.status === 'absent' && (

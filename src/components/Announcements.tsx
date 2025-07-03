@@ -13,6 +13,12 @@ const initialAnnouncements = [
     title: '주간 일정',
     date: new Date(),
     content: '이번 주 주간 회의는 금요일 오후 3시에서 오후 5시로 변경되었습니다. 모두 착오 없으시길 바랍니다.'
+  },
+  {
+    id: 2,
+    title: '기타',
+    date: new Date(),
+    content: '기타 건의사항이나 전달사항이 있다면 여기에 작성해주세요.'
   }
 ];
 
